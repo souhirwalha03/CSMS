@@ -1,0 +1,233 @@
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:7112
+load:0x40078000,len:15616
+load:0x40080400,len:4
+ho 8 tail 4 room 4
+load:0x40080404,len:3876
+entry 0x4008064c
+[0;32mI (31) boot: ESP-IDF v5.1.3 2nd stage bootloader[0m
+[0;32mI (31) boot: compile time May 10 2024 13:54:55[0m
+[0;32mI (31) boot: Multicore bootloader[0m
+[0;32mI (35) boot: chip revision: v3.0[0m
+[0;32mI (39) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (44) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (48) boot.esp32: SPI Flash Size : 4MB[0m
+[0;32mI (53) boot: Enabling RNG early entropy source...[0m
+[0;32mI (58) boot: Partition Table:[0m
+[0;32mI (62) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (69) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (77) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (84) boot:  2 factory          factory app      00 00 00010000 00200000[0m
+[0;32mI (92) boot: End of partition table[0m
+[0;32mI (96) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=3045ch (197724) map[0m
+[0;32mI (176) esp_image: segment 1: paddr=00040484 vaddr=3ffb0000 size=03eb8h ( 16056) load[0m
+[0;32mI (182) esp_image: segment 2: paddr=00044344 vaddr=40080000 size=0bcd4h ( 48340) load[0m
+[0;32mI (202) esp_image: segment 3: paddr=00050020 vaddr=400d0020 size=b29e4h (731620) map[0m
+[0;32mI (467) esp_image: segment 4: paddr=00102a0c vaddr=4008bcd4 size=0cb90h ( 52112) load[0m
+[0;32mI (501) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (501) boot: Disabling RNG early entropy source...[0m
+[0;32mI (513) cpu_start: Multicore app[0m
+[0;32mI (513) cpu_start: Pro cpu up.[0m
+[0;32mI (513) cpu_start: Starting app cpu, entry point is 0x40081534[0m
+[0;32mI (0) cpu_start: App cpu up.[0m
+[0;32mI (531) cpu_start: Pro cpu start user code[0m
+[0;32mI (531) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (531) cpu_start: Application information:[0m
+[0;32mI (536) cpu_start: Project name:     mqtt_beebotte[0m
+[0;32mI (541) cpu_start: App version:      1[0m
+[0;32mI (546) cpu_start: Compile time:     May 10 2024 13:54:44[0m
+[0;32mI (552) cpu_start: ELF file SHA256:  61fb1407...[0m
+[0;32mI (557) cpu_start: ESP-IDF:          v5.1.3[0m
+[0;32mI (562) cpu_start: Min chip rev:     v0.0[0m
+[0;32mI (567) cpu_start: Max chip rev:     v3.99 [0m
+[0;32mI (571) cpu_start: Chip rev:         v3.0[0m
+[0;32mI (576) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (583) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (589) heap_init: At 3FFB85D0 len 00027A30 (158 KiB): DRAM[0m
+[0;32mI (596) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (602) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (608) heap_init: At 40098864 len 0000779C (29 KiB): IRAM[0m
+[0;32mI (616) spi_flash: detected chip: generic[0m
+[0;32mI (619) spi_flash: flash io: dio[0m
+[0;32mI (624) app_start: Starting scheduler on CPU0[0m
+[0;32mI (628) app_start: Starting scheduler on CPU1[0m
+[0;32mI (628) main_task: Started on CPU0[0m
+[0;32mI (638) main_task: Calling app_main()[0m
+1
+I (675) wifi:wifi driver task: 3ffc0570, prio:23, stack:6656, core=0
+I (694) wifi:wifi firmware version: 0016c4d
+I (694) wifi:wifi certification version: v7.0
+I (695) wifi:config NVS flash: enabled
+I (695) wifi:config nano formating: disabled
+I (699) wifi:Init data frame dynamic rx buffer num: 32
+I (704) wifi:Init static rx mgmt buffer num: 5
+I (708) wifi:Init management short buffer num: 32
+I (712) wifi:Init dynamic tx buffer num: 32
+I (716) wifi:Init static rx buffer size: 1600
+I (720) wifi:Init static rx buffer num: 10
+I (724) wifi:Init dynamic rx buffer num: 32
+[0;32mI (729) wifi_init: rx ba win: 6[0m
+[0;32mI (732) wifi_init: tcpip mbox: 32[0m
+[0;32mI (736) wifi_init: udp mbox: 6[0m
+[0;32mI (739) wifi_init: tcp mbox: 6[0m
+[0;32mI (743) wifi_init: tcp tx win: 5760[0m
+[0;32mI (747) wifi_init: tcp rx win: 5760[0m
+[0;32mI (751) wifi_init: tcp mss: 1440[0m
+[0;32mI (755) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (760) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (765) azure: Setting WiFi configuration SSID Orange_Ext...[0m
+[0;32mI (772) phy_init: phy_version 4791,2c4672b,Dec 20 2023,16:06:06[0m
+I (855) wifi:mode : sta (7c:87:ce:2d:7c:60)
+I (856) wifi:enable tsf
+I (870) wifi:new:<4,0>, old:<1,0>, ap:<255,255>, sta:<4,0>, prof:1
+I (872) wifi:state: init -> auth (b0)
+I (875) wifi:state: auth -> assoc (0)
+I (881) wifi:state: assoc -> run (10)
+W (883) wifi:[ADDBA]rx delba, code:39, delete tid:0
+W (883) wifi:[ADDBA]rx delba, code:39, delete tid:0
+I (991) wifi:connected with Orange_Ext, aid = 2, channel 4, BW20, bssid = 00:e0:20:1b:01:27
+I (992) wifi:security: WPA2-PSK, phy: bgn, rssi: -67
+I (993) wifi:pm start, type: 1
+
+I (996) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us
+I (1015) wifi:AP's beacon interval = 102400 us, DTIM period = 1
+[0;32mI (2511) esp_netif_handlers: sta ip: 192.168.1.59, mask: 255.255.255.0, gw: 192.168.1.1[0m
+2
+WiFi connected!
+3
+Initializing SNTP
+ESP platform sntp inited!
+Time is not set yet. Connecting to WiFi and getting time over NTP. timeinfo.tm_year:70
+Waiting for system time to be set... tm_year:0[times:1]
+Waiting for system time to be set... tm_year:70[times:2]
+I (6078) wifi:<ba-add>idx:0 (ifx:0, 00:e0:20:1b:01:27), tid:0, ssn:2, winSize:64
+[0;32mI (7518) platform: The current date/time is: Fri May 10 18:42:30 2024[0m
+4
+5
+[0;32mI (9524) rc522: Initialized (firmware v2.0)[0m
+6
+7
+21
+Creating IoTHub Device handle
+21
+23
+24
+25
+27
+Waiting for message to be sent to device (will quit after 1000 messages)
+8
+9
+10
+9
+-> 18:42:33 CONNECT | VER: 4 | KEEPALIVE: 240 | FLAGS: 192 | USERNAME: evcsHub.azure-devices.net/evcsDevice/?api-version=2020-09-30&DeviceClientType=iothubclient%2f1.13.0%20(native%3b%20freertos%3b%20esp%20platform) | PWD: XXXX | CLEAN: 0
+<- 18:42:33 CONNACK | SESSION_PRESENT: true | RETURN_CODE: 0x0
+-> 18:42:33 SUBSCRIBE | PACKET_ID: 2 | TOPIC_NAME: devices/evcsDevice/messages/devicebound/# | QOS: 1
+<- 18:42:33 SUBACK | PACKET_ID: 2 | RETURN_CODE: 1
+10
+9
+10
+9
+10
+9
+10
+9
+10
+9
+10
+9
+10
+9
+10
+9
+10
+9
+10
+9
+10
+9
+10
+9
+10
+9
+10
+9
+10
+9
+<- 18:42:48 PUBLISH | IS_DUP: false | RETAIN: 0 | QOS: DELIVER_AT_LEAST_ONCE | TOPIC_NAME: devices/evcsDevice/messages/devicebound/%24.mid=My%20Message%20ID&%24.to=%2Fdevices%2FevcsDevice%2Fmessages%2Fdevicebound&iothub-ack=full | PACKET_ID: 56 | PAYLOAD_LEN: 18
+41
+43
+44
+45
+47
+Received Binary message
+Message ID: My Message ID
+ Correlation ID: <unavailable>
+ Data: <<<[{"RFID_tag":"0"}]>>> & Size=18
+48
+49
+50
+Not a client
+51
+52
+53
+58
+60
+-> 18:42:48 PUBACK | PACKET_ID: 56
+10
+9
+10
+9
+10
+9
+10
+9
+10
+9
+10
+9
+******** EXECUTING rc522_handler ********
+[0;32mI (31791) azure: Tag scanned (sn: 966627794163)[0m
+12
+13
+15
+16
+10
+9
+10
+9
+10
+9
+[0;31mE (34620) esp-tls-mbedtls: read error :-0x004C:[0m
+10
+9
+10
+9
+10
+9
+18
+Message sent successfully.
+19
+33
+34
+Error: Time:<NO TIME IMPL> File:./components/port/src/tlsio_esp_tls.c Func:tlsio_esp_tls_send_async Line:555 tlsio_esp_tls_send_async without a prior successful open
+Error: Time:<NO TIME IMPL> File:./azure-iot-sdk-c/umqtt/src/mqtt_client.c Func:sendPacketItem Line:393 Failure sending control packet data
+Error: Time:<NO TIME IMPL> File:./azure-iot-sdk-c/umqtt/src/mqtt_client.c Func:mqtt_client_disconnect Line:1350 Error: mqtt_client_disconnect send failed
+10
+9
+17
+10
+9
+10
+9
+Error: Time:<NO TIME IMPL> File:./components/port/src/tlsio_esp_tls.c Func:tlsio_esp_tls_destroy Line:153 tlsio_esp_tls_destroy called while not in TLSIO_STATE_CLOSED.
+35
+36
+37
+[0;31mE (40944) FreeRTOS: FreeRTOS Task "listen_task" should not return, Aborting now![0m
+
+abort() was called at PC 

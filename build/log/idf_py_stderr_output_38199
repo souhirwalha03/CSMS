@@ -1,0 +1,78 @@
+[0;33m--- esp-idf-monitor 1.4.0 on /dev/cu.usbserial-0001 115200 ---[0m
+[0;33m--- Quit: Ctrl+] | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H ---[0m
+[0;33m0x40080400: _init at ??:?
+[0m
+[0;33m0x40081534: call_start_cpu1 at /Users/souhir/esp-idf-v5.1.3/components/esp_system/port/cpu_start.c:159
+[0m
+[0;33m0x400f0183: task_wdt_timeout_handling at /Users/souhir/esp-idf-v5.1.3/components/esp_system/task_wdt/task_wdt.c:461 (discriminator 3)
+0x400f030a: task_wdt_isr at /Users/souhir/esp-idf-v5.1.3/components/esp_system/task_wdt/task_wdt.c:585
+0x40082eed: _xt_lowint1 at /Users/souhir/esp-idf-v5.1.3/components/freertos/FreeRTOS-Kernel/portable/xtensa/xtensa_vectors.S:1240
+0x4008b31c: xQueueGenericSend at /Users/souhir/esp-idf-v5.1.3/components/freertos/FreeRTOS-Kernel/queue.c:877
+0x4010377a: sys_mutex_unlock at /Users/souhir/esp-idf-v5.1.3/components/lwip/port/freertos/sys_arch.c:77
+0x40103aaa: sys_arch_unprotect at /Users/souhir/esp-idf-v5.1.3/components/lwip/port/freertos/sys_arch.c:483
+0x40108c85: netconn_recv_data at /Users/souhir/esp-idf-v5.1.3/components/lwip/lwip/src/api/api_lib.c:602
+0x40108dda: netconn_recv_data_tcp at /Users/souhir/esp-idf-v5.1.3/components/lwip/lwip/src/api/api_lib.c:727
+0x40108e76: netconn_recv_tcp_pbuf_flags at /Users/souhir/esp-idf-v5.1.3/components/lwip/lwip/src/api/api_lib.c:808 (discriminator 4)
+0x40104989: lwip_recv_tcp at /Users/souhir/esp-idf-v5.1.3/components/lwip/lwip/src/api/sockets.c:951
+0x40105c8f: lwip_recvfrom at /Users/souhir/esp-idf-v5.1.3/components/lwip/lwip/src/api/sockets.c:1218
+0x40105d42: lwip_read at /Users/souhir/esp-idf-v5.1.3/components/lwip/lwip/src/api/sockets.c:1260
+0x400d737a: esp_vfs_read at /Users/souhir/esp-idf-v5.1.3/components/vfs/vfs.c:471 (discriminator 4)
+0x4000bdbb: _read_r in ROM
+0x400017ea: read in ROM
+0x40114857: mbedtls_net_recv at /Users/souhir/esp-idf-v5.1.3/components/mbedtls/port/net_sockets.c:351
+0x4010ef81: mbedtls_ssl_fetch_input at /Users/souhir/esp-idf-v5.1.3/components/mbedtls/mbedtls/library/ssl_msg.c:2327
+0x4010f5a1: ssl_get_next_record at /Users/souhir/esp-idf-v5.1.3/components/mbedtls/mbedtls/library/ssl_msg.c:4806
+0x4010f650: mbedtls_ssl_read_record at /Users/souhir/esp-idf-v5.1.3/components/mbedtls/mbedtls/library/ssl_msg.c:4159
+0x4010f77a: mbedtls_ssl_read at /Users/souhir/esp-idf-v5.1.3/components/mbedtls/mbedtls/library/ssl_msg.c:5743
+0x4010de7d: esp_mbedtls_read at /Users/souhir/esp-idf-v5.1.3/components/esp-tls/esp_tls_mbedtls.c:226
+0x40179eef: esp_tls_conn_read at /Users/souhir/esp-idf-v5.1.3/components/esp-tls/esp_tls.c:129
+0x400e3d07: dowork_read at /Users/souhir/CODES/IotHub_send_receive_copy/components/port/src/tlsio_esp_tls.c:406
+0x400e3e8b: tlsio_esp_tls_dowork at /Users/souhir/CODES/IotHub_send_receive_copy/components/port/src/tlsio_esp_tls.c:496
+0x40178b23: xio_dowork at /Users/souhir/CODES/IotHub_send_receive_copy/azure-iot-sdk-c/c-utility/src/xio.c:164
+0x400e279f: mqtt_client_dowork at /Users/souhir/CODES/IotHub_send_receive_copy/azure-iot-sdk-c/umqtt/src/mqtt_client.c:1397
+0x400e090b: IoTHubTransport_MQTT_Common_DoWork at /Users/souhir/CODES/IotHub_send_receive_copy/azure-iot-sdk-c/iothub_client/src/iothubtransport_mqtt_common.c:3655
+0x400dd149: IoTHubTransportMqtt_DoWork at /Users/souhir/CODES/IotHub_send_receive_copy/azure-iot-sdk-c/iothub_client/src/iothubtransportmqtt.c:100
+0x400d9ead: IoTHubClientCore_LL_DoWork at /Users/souhir/CODES/IotHub_send_receive_copy/azure-iot-sdk-c/iothub_client/src/iothub_client_core_ll.c:2122
+0x400d9355: IoTHubDeviceClient_LL_DoWork at /Users/souhir/CODES/IotHub_send_receive_copy/azure-iot-sdk-c/iothub_client/src/iothub_device_client_ll.c:91
+0x400d91c2: iothub_receive at /Users/souhir/CODES/IotHub_send_receive_copy/main/azure_main.c:297 (discriminator 1)
+0x400d92e8: app_main at /Users/souhir/CODES/IotHub_send_receive_copy/main/azure_main.c:356
+0x40180403: main_task at /Users/souhir/esp-idf-v5.1.3/components/freertos/app_startup.c:208 (discriminator 13)
+0x4008ba31: vPortTaskWrapper at /Users/souhir/esp-idf-v5.1.3/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:162
+[0m
+[0;33m0x400f0183: task_wdt_timeout_handling at /Users/souhir/esp-idf-v5.1.3/components/esp_system/task_wdt/task_wdt.c:461 (discriminator 3)
+0x400f030a: task_wdt_isr at /Users/souhir/esp-idf-v5.1.3/components/esp_system/task_wdt/task_wdt.c:585
+0x40082eed: _xt_lowint1 at /Users/souhir/esp-idf-v5.1.3/components/freertos/FreeRTOS-Kernel/portable/xtensa/xtensa_vectors.S:1240
+0x4000bfed: _xtos_set_intlevel in ROM
+0x4008bd17: vPortClearInterruptMaskFromISR at /Users/souhir/esp-idf-v5.1.3/components/freertos/FreeRTOS-Kernel/portable/xtensa/include/freertos/portmacro.h:568
+ (inlined by) vPortExitCritical at /Users/souhir/esp-idf-v5.1.3/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:532
+0x4008b898: xQueueSemaphoreTake at /Users/souhir/esp-idf-v5.1.3/components/freertos/FreeRTOS-Kernel/queue.c:1720
+0x40103752: sys_mutex_lock at /Users/souhir/esp-idf-v5.1.3/components/lwip/port/freertos/sys_arch.c:63
+0x40103a9c: sys_arch_protect at /Users/souhir/esp-idf-v5.1.3/components/lwip/port/freertos/sys_arch.c:470
+0x40108c51: netconn_recv_data at /Users/souhir/esp-idf-v5.1.3/components/lwip/lwip/src/api/api_lib.c:597
+0x40108dda: netconn_recv_data_tcp at /Users/souhir/esp-idf-v5.1.3/components/lwip/lwip/src/api/api_lib.c:727
+0x40108e76: netconn_recv_tcp_pbuf_flags at /Users/souhir/esp-idf-v5.1.3/components/lwip/lwip/src/api/api_lib.c:808 (discriminator 4)
+0x40104989: lwip_recv_tcp at /Users/souhir/esp-idf-v5.1.3/components/lwip/lwip/src/api/sockets.c:951
+0x40105c8f: lwip_recvfrom at /Users/souhir/esp-idf-v5.1.3/components/lwip/lwip/src/api/sockets.c:1218
+0x40105d42: lwip_read at /Users/souhir/esp-idf-v5.1.3/components/lwip/lwip/src/api/sockets.c:1260
+0x400d737a: esp_vfs_read at /Users/souhir/esp-idf-v5.1.3/components/vfs/vfs.c:471 (discriminator 4)
+0x4000bdbb: _read_r in ROM
+0x400017ea: read in ROM
+0x40114857: mbedtls_net_recv at /Users/souhir/esp-idf-v5.1.3/components/mbedtls/port/net_sockets.c:351
+0x4010ef81: mbedtls_ssl_fetch_input at /Users/souhir/esp-idf-v5.1.3/components/mbedtls/mbedtls/library/ssl_msg.c:2327
+0x4010f5a1: ssl_get_next_record at /Users/souhir/esp-idf-v5.1.3/components/mbedtls/mbedtls/library/ssl_msg.c:4806
+0x4010f650: mbedtls_ssl_read_record at /Users/souhir/esp-idf-v5.1.3/components/mbedtls/mbedtls/library/ssl_msg.c:4159
+0x4010f77a: mbedtls_ssl_read at /Users/souhir/esp-idf-v5.1.3/components/mbedtls/mbedtls/library/ssl_msg.c:5743
+0x4010de7d: esp_mbedtls_read at /Users/souhir/esp-idf-v5.1.3/components/esp-tls/esp_tls_mbedtls.c:226
+0x40179eef: esp_tls_conn_read at /Users/souhir/esp-idf-v5.1.3/components/esp-tls/esp_tls.c:129
+0x400e3d07: dowork_read at /Users/souhir/CODES/IotHub_send_receive_copy/components/port/src/tlsio_esp_tls.c:406
+0x400e3e8b: tlsio_esp_tls_dowork at /Users/souhir/CODES/IotHub_send_receive_copy/components/port/src/tlsio_esp_tls.c:496
+0x40178b23: xio_dowork at /Users/souhir/CODES/IotHub_send_receive_copy/azure-iot-sdk-c/c-utility/src/xio.c:164
+0x400e279f: mqtt_client_dowork at /Users/souhir/CODES/IotHub_send_receive_copy/azure-iot-sdk-c/umqtt/src/mqtt_client.c:1397
+0x400e090b: IoTHubTransport_MQTT_Common_DoWork at /Users/souhir/CODES/IotHub_send_receive_copy/azure-iot-sdk-c/iothub_client/src/iothubtransport_mqtt_common.c:3655
+0x400dd149: IoTHubTransportMqtt_DoWork at /Users/souhir/CODES/IotHub_send_receive_copy/azure-iot-sdk-c/iothub_client/src/iothubtransportmqtt.c:100
+0x400d9ead: IoTHubClientCore_LL_DoWork at /Users/souhir/CODES/IotHub_send_receive_copy/azure-iot-sdk-c/iothub_client/src/iothub_client_core_ll.c:2122
+0x400d9355: IoTHubDeviceClient_LL_DoWork at /Users/souhir/CODES/IotHub_send_receive_copy/azure-iot-sdk-c/iothub_client/src/iothub_device_client_ll.c:91
+0x400d91c2: iothub_receive at /Users/souhir/CODES/IotHub_send_receive_copy/main/azure_main.c:297 (discriminator 1)
+0x400d92e8: app_main at /Users/souhir/CODES/IotHub_send_receive_copy/main/azure_main.c:356
+0x40180403: main_task at /Users/souhir/esp-idf-v5.1.3/components/freertos/app_startup.c:208 (discriminator 13)
+0x4008ba31: vPortTaskWrapper at /Users/souhir/esp-idf-v5.1.3/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:1
