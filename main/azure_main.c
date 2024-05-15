@@ -106,13 +106,7 @@ static IOTHUB_DEVICE_CLIENT_LL_HANDLE device_ll_handle;
 
 static size_t g_message_recv_count = 0;
 
-bool vehiculeDetected= false;
-void vehicule_detection(void* pvParameters) {
-    while (1) {
-        // vehiculeDetected = !(Read(CP));
-        // vTaskDelay(pdMS_TO_TICKS(1000)); // Adjust delay as needed
-    }
-}
+
 static IOTHUBMESSAGE_DISPOSITION_RESULT receive_msg_callback(IOTHUB_MESSAGE_HANDLE message, void* user_context)
 {
     (void)user_context;
@@ -167,17 +161,7 @@ static IOTHUBMESSAGE_DISPOSITION_RESULT receive_msg_callback(IOTHUB_MESSAGE_HAND
                                     printf("you don't have enough balance in your account\n");
                                 } else {
                                     printf("your account balance is: %d\n", balance);
-                                    while (balance){
-                                        // DC_Relay_contactor = HIGH
-                                            while (vehiculeDetected == true && CP== LOW ){
-                                            // READ currrent
-                                            // read voltage 
-                                            // calcultate energy consumed
-                                            // oprn websocket over MQTT_Protocol
-                                            // balance = balance - energy_consume * charging_rate
-                                        }
-                                        // send stopped to iothub and new balance
-                                    }
+                                    
                                 }
                             }
                         }
