@@ -3,7 +3,7 @@
 #include <inttypes.h>
 #include "esp_event.h"
 #include "esp_netif.h"
-#include "esp_wifi.h"v
+#include "esp_wifi.h"
 #include "esp_system.h"
 #include "esp_log.h"
 #include "nvs_flash.h"
@@ -29,11 +29,9 @@
 #include "azure_c_shared_utility/crt_abstractions.h"
 
 // WiFi credentials
-#define EXAMPLE_WIFI_SSID "Orange_Ext"
-#define EXAMPLE_WIFI_PASS "20400424"
+#define EXAMPLE_WIFI_SSID "*****"
+#define EXAMPLE_WIFI_PASS "*****"
 
-// #define EXAMPLE_WIFI_SSID "Wokwi-GUEST"
-// #define EXAMPLE_WIFI_PASS ""
 
 // Azure IoT Hub connection string
 #define connectionString "HostName=evcsHub.azure-devices.net;DeviceId=evcsDevice;SharedAccessKey=CGPPVhTlK0ml/EjrbfXDO1CZR2X021e1NAIoTL5VFfQ="
@@ -49,8 +47,12 @@ esp_event_handler_instance_t instance_any_id;
 #ifndef BIT0
 #define BIT0 (0x1 << 0)
 #endif
-static void event_handler(void* arg, esp_event_base_t event_base,
-                          int32_t event_id, void* event_data)
+
+
+
+
+static void event_handler(void *arg, esp_event_base_t event_base,
+                          int32_t event_id, void *event_data)
 {
     if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_START) {
         esp_wifi_connect();
@@ -104,7 +106,13 @@ static IOTHUB_DEVICE_CLIENT_LL_HANDLE device_ll_handle;
 
 static size_t g_message_recv_count = 0;
 
-
+bool vehiculeDetected= false;
+void vehicule_detection(void* pvParameters) {
+    while (1) {
+        // vehiculeDetected = !(Read(CP));
+        // vTaskDelay(pdMS_TO_TICKS(1000)); // Adjust delay as needed
+    }
+}
 static IOTHUBMESSAGE_DISPOSITION_RESULT receive_msg_callback(IOTHUB_MESSAGE_HANDLE message, void* user_context)
 {
     (void)user_context;
@@ -159,6 +167,17 @@ static IOTHUBMESSAGE_DISPOSITION_RESULT receive_msg_callback(IOTHUB_MESSAGE_HAND
                                     printf("you don't have enough balance in your account\n");
                                 } else {
                                     printf("your account balance is: %d\n", balance);
+                                    while (balance){
+                                        // DC_Relay_contactor = HIGH
+                                            while (vehiculeDetected == true && CP== LOW ){
+                                            // READ currrent
+                                            // read voltage 
+                                            // calcultate energy consumed
+                                            // oprn websocket over MQTT_Protocol
+                                            // balance = balance - energy_consume * charging_rate
+                                        }
+                                        // send stopped to iothub and new balance
+                                    }
                                 }
                             }
                         }
@@ -352,6 +371,7 @@ void app_main(){
         .spi.sck_gpio = 19,
         .spi.sda_gpio = 22,
     };
+
     rc522_create(&config, &scanner);
     rc522_start(scanner);
 
