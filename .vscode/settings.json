@@ -22,6 +22,8 @@
     "iothubtransportmqtt.h": "c",
     "iothub_device_client_ll.h": "c",
     "iothub_receive.h": "c",
-    "esp_event.h": "c"
+    "esp_event.h": "c",
+    "crt_abstractions.h": "c",
+    "gpio.h": "c"
   }
 }

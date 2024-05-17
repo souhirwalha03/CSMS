@@ -28,6 +28,9 @@
 #include "azure_c_shared_utility/shared_util_options.h"
 #include "azure_c_shared_utility/crt_abstractions.h"
 
+#include "driver/gpio.h"
+#include "driver/adc.h"
+#include "freertos/timers.h"
 // WiFi credentials
 #define EXAMPLE_WIFI_SSID "*****"
 #define EXAMPLE_WIFI_PASS "*****"
@@ -48,11 +51,20 @@ esp_event_handler_instance_t instance_any_id;
 #define BIT0 (0x1 << 0)
 #endif
 
+#define DC_RELAY_CONTACTOR 5
+
+#define CP_READ 0
+#define PWM_CP 25
+#define PP 35
+
+#define CURRENT_MODULE_OUTPUT 34
+#define VOLTAGE_MODULE_OUTPUT 36
+unsigned long n;
+
+uint32_t CP;
 
 
-
-static void event_handler(void *arg, esp_event_base_t event_base,
-                          int32_t event_id, void *event_data)
+static void event_handler(void *arg, esp_event_base_t event_base, int32_t event_id, void *event_data)
 {
     if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_START) {
         esp_wifi_connect();
@@ -106,7 +118,50 @@ static IOTHUB_DEVICE_CLIENT_LL_HANDLE device_ll_handle;
 
 static size_t g_message_recv_count = 0;
 
+float read_adc(adc_channel_t channel)
+{
+    uint32_t adc_value = adc1_get_raw(channel);
 
+    // 0 => 0V | 4095 (12-bit ADC resolution) => 3.3V 
+    float voltage = adc_value * 3.3 / 4095;
+    printf("Voltage: %.2fV\n", voltage);
+    return voltage;
+}
+
+
+float read_current(adc_channel_t channel)
+{
+    uint32_t RawValue = adc1_get_raw(channel);
+
+    // 0-5V for 0-30A
+    double Volt = RawValue * 3.3 / 4095;
+
+    // ((AvgAcs * (3.3 / 1024.0)) is converting the read voltage in 0-3.3 volts
+    // 1.65 is offset (assumed that the system is working on 3.3V so the Vout at no current comes
+    // out to be 1.65 which is offset. If your system is working on a different voltage then
+    // you must change the offset according to the input voltage)
+    // 0.066v(66mV) is the rise in output voltage when 1A current flows at input
+    // https://www.handsontec.com/dataspecs/ACS712-Current%20Sensor.pdf
+    float current = (Volt - 1.65  )/0.066;
+
+    printf("Current: %.2f\n", current);
+    return current;
+}
+
+float energy_consumed(time_t time)
+{
+    float voltage_V = read_adc(ADC1_CHANNEL_0);
+    float current_A = read_current(ADC1_CHANNEL_6);
+
+    float energy_KWh = (voltage_V * current_A * time)/1000;
+        printf("energy_KWh: %.2fKWh\n", energy_KWh);
+
+    return energy_KWh;
+
+}
+// void vehicule_detection(void* pvParameters) {
+//     status();
+// }
 static IOTHUBMESSAGE_DISPOSITION_RESULT receive_msg_callback(IOTHUB_MESSAGE_HANDLE message, void* user_context)
 {
     (void)user_context;
@@ -155,13 +210,43 @@ static IOTHUBMESSAGE_DISPOSITION_RESULT receive_msg_callback(IOTHUB_MESSAGE_HAND
                                     printf("RFID_tag: %s\n", rfid_tag_value);
                                 }
                             }
+                            
                             if (cJSON_IsNumber(account_balance)) {
                                 int balance = account_balance->valueint;
                                 if (balance == 0) {
                                     printf("you don't have enough balance in your account\n");
                                 } else {
+                                   
                                     printf("your account balance is: %d\n", balance);
-                                    
+                                    time_t start_time, now;
+                                    time(&start_time);
+
+                                    while (balance){
+                                        unsigned long volts = read_adc(ADC2_CHANNEL_1);
+                                        while ((volts >= 621) && (volts <= 1242))
+                                        {
+                                            volts = read_adc(ADC2_CHANNEL_1);
+                                            gpio_set_level(DC_RELAY_CONTACTOR, 1);
+                                            
+                                            time_t now;
+                                            time(&now);
+                                           
+                                            printf("charging\n");
+
+                                            time_t time_passed = now - start_time;
+                                            printf("%lld\n", time_passed);
+                                            float energy = energy_consumed(time_passed);
+                                            printf("energy: %f\n", energy);
+                                            
+                                            // oprn websocket over MQTT_Protocol
+                                            // balance = balance - energy_consume * charging_rate
+                                        }
+
+                                        printf("error");
+                                        gpio_set_level(DC_RELAY_CONTACTOR, 0);
+
+                                        // send stopped to iothub and new balance
+                                    }
                                 }
                             }
                         }
@@ -346,9 +431,45 @@ void app_main(){
     printf("WiFi connected!\n");
     vTaskDelay(1000 / portTICK_PERIOD_MS);
 
-    /*RFID Module*/
+   /***** contactor */
+        // gpio_pad_select_gpio(DC_RELAY_CONTACTOR);  
+
+        gpio_set_direction(DC_RELAY_CONTACTOR, GPIO_MODE_OUTPUT);
+
+    
+    /****** current * ADC1 channel 6 */
+    
+        // Configure ADC1 capture width
+        // 12 bit decimal value from 0 to 4095
+        adc1_config_width(ADC_WIDTH_BIT_12); 
+        // Configure the ADC1 channel // 11dB attenuation (ADC_ATTEN_DB_11) gives full-scale voltage 0 - 3.9V // 4053 ~ 3.86V
+        adc1_config_channel_atten(ADC1_CHANNEL_6, ADC_ATTEN_DB_11);
+
+            // int val = adc1_get_raw(ADC1_CHANNEL_6);
+
+
+    /******* voltage * ADC1 channel 0 */
+        adc1_config_width(ADC_WIDTH_BIT_12); 
+        adc1_config_channel_atten(ADC1_CHANNEL_0, ADC_ATTEN_DB_11);
+
+            // int val = adc1_get_raw(ADC1_CHANNEL_0);
+    
+    /****** connector */
+        /****** CP * ADC2 channel 1  */
+            adc1_config_width(ADC_WIDTH_BIT_12); 
+            adc1_config_channel_atten(ADC2_CHANNEL_1, ADC_ATTEN_DB_11);
+                // int val = adc1_get_raw(ADC2_CHANNEL_1);
+
+        // /****** PP * ADC1 channel 7  */
+        //     adc1_config_width(ADC_WIDTH_BIT_12); 
+        //     adc1_config_channel_atten(ADC1_CHANNEL_7, ADC_ATTEN_DB_11);
+
+
+   
+
+    /******* RFID Module*/
     // Initialize RC522
-        rc522_config_t config = {
+    rc522_config_t config = {
         .spi.host = VSPI_HOST,
         .spi.miso_gpio = 25,
         .spi.mosi_gpio = 23,
