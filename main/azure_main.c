@@ -63,6 +63,20 @@ unsigned long n;
 
 uint32_t CP;
 
+// Function prototypes
+static void event_handler(void *arg, esp_event_base_t event_base, int32_t event_id, void *event_data);
+static void initialise_wifi(void);
+static void connection_status_callback(IOTHUB_CLIENT_CONNECTION_STATUS result, IOTHUB_CLIENT_CONNECTION_STATUS_REASON reason, void* user_context);
+static void send_confirm_callback(IOTHUB_CLIENT_CONFIRMATION_RESULT result, void* userContextCallback);
+static IOTHUBMESSAGE_DISPOSITION_RESULT receive_msg_callback(IOTHUB_MESSAGE_HANDLE message, void* user_context);
+void iothub_send(uint64_t serial_number);
+void iothub_receive();
+void app_main();
+static void rc522_handler(void* arg, esp_event_base_t base, int32_t event_id, void* event_data);
+float read_adc(adc2_channel_t channel);
+float read_current(adc2_channel_t channel);
+float energy_consumed(float voltage, float current, time_t time_seconds);
+
 
 static void event_handler(void *arg, esp_event_base_t event_base, int32_t event_id, void *event_data)
 {
