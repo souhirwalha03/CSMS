@@ -1,0 +1,136 @@
+[1/79] Performing build step for 'bootloader'
+[1/1] cd /Users/souhir/CODES/IotHub_send_receive_copy/build/bootloader/esp-idf/esptool_py && /Users/souhir/.espressif/python_env/idf5.1_py3.12_env/bin/python /Users/souhir/esp-idf-v5.1.3/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 /Users/souhir/CODES/IotHub_send_receive_copy/build/bootloader/bootloader.bin
+Bootloader binary size 0x6850 bytes. 0x7b0 bytes (7%) free.
+[2/79] No install step for 'bootloader'
+[3/79] Completed 'bootloader'
+[4/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/c-utility/src/gb_time.c.obj
+[5/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/c-utility/src/hmac.c.obj
+[6/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/c-utility/src/hmacsha256.c.obj
+[7/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/c-utility/src/sha224.c.obj
+[8/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/c-utility/src/sha1.c.obj
+[9/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/c-utility/src/optionhandler.c.obj
+[10/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/c-utility/src/sha384-512.c.obj
+[11/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/c-utility/src/httpheaders.c.obj
+[12/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/c-utility/src/httpapiexsas.c.obj
+[13/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/c-utility/src/string_tokenizer.c.obj
+[14/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/c-utility/src/sastoken.c.obj
+[15/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/c-utility/src/usha.c.obj
+[16/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/c-utility/src/httpapiex.c.obj
+[17/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/c-utility/src/map.c.obj
+[18/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/c-utility/src/xio.c.obj
+[19/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/c-utility/src/urlencode.c.obj
+[20/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/c-utility/src/vector.c.obj
+[21/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/c-utility/src/strings.c.obj
+[22/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/c-utility/src/azure_base64.c.obj
+[23/79] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/azure_main.c.obj
+In file included from /Users/souhir/CODES/IotHub_send_receive_copy/main/azure_main.c:32:
+/Users/souhir/esp-idf-v5.1.3/components/driver/deprecated/driver/adc.h:19:2: warning: #warning "legacy adc driver is deprecated, please migrate to use esp_adc/adc_oneshot.h and esp_adc/adc_continuous.h for oneshot mode and continuous mode drivers respectively" [-Wcpp]
+   19 | #warning "legacy adc driver is deprecated, please migrate to use esp_adc/adc_oneshot.h and esp_adc/adc_continuous.h for oneshot mode and continuous mode drivers respectively"
+      |  ^~~~~~~
+/Users/souhir/CODES/IotHub_send_receive_copy/main/azure_main.c: In function 'initialise_wifi':
+/Users/souhir/CODES/IotHub_send_receive_copy/main/azure_main.c:103:34: warning: extra tokens at end of #ifdef directive
+  103 | #ifdef CONFIG_IDF_TARGET_ESP8266 || (ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(4, 0, 0))
+      |                                  ^~
+/Users/souhir/CODES/IotHub_send_receive_copy/main/azure_main.c: In function 'iothub_receive':
+/Users/souhir/CODES/IotHub_send_receive_copy/main/azure_main.c:425:38: warning: unused variable 'protocol' [-Wunused-variable]
+  425 |     IOTHUB_CLIENT_TRANSPORT_PROVIDER protocol;
+      |                                      ^~~~~~~~
+/Users/souhir/CODES/IotHub_send_receive_copy/main/azure_main.c: In function 'app_main':
+/Users/souhir/CODES/IotHub_send_receive_copy/main/azure_main.c:489:9: warning: 'ADC_ATTEN_DB_11' is deprecated [-Wdeprecated-declarations]
+  489 |         adc1_config_channel_atten(ADC1_CHANNEL_6, ADC_ATTEN_DB_11);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /Users/souhir/esp-idf-v5.1.3/components/driver/deprecated/driver/adc_types_legacy.h:8,
+                 from /Users/souhir/esp-idf-v5.1.3/components/driver/deprecated/driver/adc.h:15:
+/Users/souhir/esp-idf-v5.1.3/components/hal/include/hal/adc_types.h:47:5: note: declared here
+   47 |     ADC_ATTEN_DB_11 __attribute__((deprecated)) = ADC_ATTEN_DB_12,  ///<This is deprecated, it behaves the same as `ADC_ATTEN_DB_12`
+      |     ^~~~~~~~~~~~~~~
+/Users/souhir/CODES/IotHub_send_receive_copy/main/azure_main.c:496:9: warning: 'ADC_ATTEN_DB_11' is deprecated [-Wdeprecated-declarations]
+  496 |         adc1_config_channel_atten(ADC1_CHANNEL_0, ADC_ATTEN_DB_11);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/souhir/esp-idf-v5.1.3/components/hal/include/hal/adc_types.h:47:5: note: declared here
+   47 |     ADC_ATTEN_DB_11 __attribute__((deprecated)) = ADC_ATTEN_DB_12,  ///<This is deprecated, it behaves the same as `ADC_ATTEN_DB_12`
+      |     ^~~~~~~~~~~~~~~
+/Users/souhir/CODES/IotHub_send_receive_copy/main/azure_main.c:503:13: warning: 'ADC_ATTEN_DB_11' is deprecated [-Wdeprecated-declarations]
+  503 |             adc1_config_channel_atten(ADC2_CHANNEL_1, ADC_ATTEN_DB_11);
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/souhir/esp-idf-v5.1.3/components/hal/include/hal/adc_types.h:47:5: note: declared here
+   47 |     ADC_ATTEN_DB_11 __attribute__((deprecated)) = ADC_ATTEN_DB_12,  ///<This is deprecated, it behaves the same as `ADC_ATTEN_DB_12`
+      |     ^~~~~~~~~~~~~~~
+/Users/souhir/CODES/IotHub_send_receive_copy/main/azure_main.c: In function 'rc522_handler':
+/Users/souhir/CODES/IotHub_send_receive_copy/main/azure_main.c:408:9: warning: statement will never be executed [-Wswitch-unreachable]
+  408 |         printf("11\n");
+      |         ^~~~~~~~~~~~~~
+/Users/souhir/CODES/IotHub_send_receive_copy/main/azure_main.c: At top level:
+/Users/souhir/CODES/IotHub_send_receive_copy/main/azure_main.c:116:13: warning: 'g_continueRunning1' defined but not used [-Wunused-variable]
+  116 | static bool g_continueRunning1 = true;
+      |             ^~~~~~~~~~~~~~~~~~
+[24/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/iothub_client/src/iothub_client_diagnostic.c.obj
+[25/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/iothub_client/src/iothub_client_ll.c.obj
+[26/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/iothub_client/src/iothub_device_client_ll.c.obj
+[27/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/iothub_client/src/iothub_client_authorization.c.obj
+[28/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/iothub_client/src/version.c.obj
+[29/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/iothub_client/src/iothub_message.c.obj
+[30/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/iothub_client/src/iothub_client_retry_control.c.obj
+[31/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/iothub_client/src/iothub_transport_ll_private.c.obj
+[32/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/iothub_client/src/iothubtransportmqtt.c.obj
+[33/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/iothub_client/src/iothubtransport.c.obj
+[34/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/iothub_client/src/iothub_client_ll_uploadtoblob.c.obj
+[35/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/umqtt/src/mqtt_message.c.obj
+[36/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/umqtt/src/mqtt_codec.c.obj
+[37/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/umqtt/src/mqtt_client.c.obj
+In file included from /Users/souhir/CODES/IotHub_send_receive_copy/azure-iot-sdk-c/umqtt/src/mqtt_client.c:17:
+/Users/souhir/CODES/IotHub_send_receive_copy/azure-iot-sdk-c/umqtt/src/mqtt_client.c: In function 'byteutil_readUTF':
+/Users/souhir/CODES/IotHub_send_receive_copy/azure-iot-sdk-c/c-utility/inc/azure_c_shared_utility/safe_math.h:11:47: warning: comparison is always true due to limited range of data type [-Wtype-limits]
+   11 | #define safe_add_size_t(a, b) ((((size_t)(a)) < ((size_t)(SIZE_MAX - ((size_t)(b))))) ? ((size_t)(a) + (size_t)(b)) : SIZE_MAX)
+      |                                               ^
+/Users/souhir/CODES/IotHub_send_receive_copy/azure-iot-sdk-c/umqtt/src/mqtt_client.c:173:30: note: in expansion of macro 'safe_add_size_t'
+  173 |         size_t malloc_size = safe_add_size_t((size_t)stringLen, 1);
+      |                              ^~~~~~~~~~~~~~~
+[38/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/serializer/src/dataserializer.c.obj
+[39/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/serializer/src/datamarshaller.c.obj
+[40/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/iothub_client/src/iothub_client_core_ll.c.obj
+[41/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/serializer/src/commanddecoder.c.obj
+[42/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/serializer/src/datapublisher.c.obj
+[43/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/serializer/src/jsondecoder.c.obj
+[44/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/serializer/src/jsonencoder.c.obj
+[45/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/serializer/src/methodreturn.c.obj
+[46/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/serializer/src/iotdevice.c.obj
+[47/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/deps/parson/parson.c.obj
+[48/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/serializer/src/codefirst.c.obj
+[49/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/serializer/src/multitree.c.obj
+[50/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/provisioning_client/src/prov_security_factory.c.obj
+[51/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/provisioning_client/src/prov_transport_mqtt_client.c.obj
+[52/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/provisioning_client/src/prov_device_client.c.obj
+[53/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/serializer/src/schemaserializer.c.obj
+[54/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/serializer/src/schemalib.c.obj
+[55/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/provisioning_client/adapters/hsm_client_data.c.obj
+[56/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/serializer/src/agenttypesystem.c.obj
+[57/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/provisioning_client/src/iothub_security_factory.c.obj
+[58/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/iothub_client/src/iothubtransport_mqtt_common.c.obj
+[59/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/provisioning_client/src/prov_transport_mqtt_common.c.obj
+[60/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/provisioning_client/deps/utpm/src/Memory.c.obj
+[61/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/provisioning_client/src/prov_auth_client.c.obj
+[62/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/iothub_client/src/iothub.c.obj
+[63/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/provisioning_client/deps/utpm/src/tpm_comm_emulator.c.obj
+[64/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/provisioning_client/adapters/hsm_client_tpm.c.obj
+[65/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/provisioning_client/src/prov_device_ll_client.c.obj
+[66/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/provisioning_client/deps/utpm/src/tpm_socket_comm.c.obj
+[67/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/c-utility/src/azure_base32.c.obj
+[68/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/serializer/src/schema.c.obj
+[69/79] Building C object esp-idf/rc522/CMakeFiles/__idf_rc522.dir/src/rc522.c.obj
+[70/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/c-utility/src/http_proxy_io.c.obj
+[71/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/provisioning_client/deps/utpm/src/tpm_codec.c.obj
+[72/79] Linking C static library esp-idf/rc522/librc522.a
+[73/79] Building C object esp-idf/port/CMakeFiles/__idf_port.dir/__/__/azure-iot-sdk-c/provisioning_client/deps/utpm/src/Marshal.c.obj
+[74/79] Linking C static library esp-idf/port/libport.a
+[75/79] Linking C static library esp-idf/main/libmain.a
+[76/79] Generating ld/sections.ld
+[77/79] Linking CXX executable mqtt_beebotte.elf
+[78/79] Generating binary image from built executable
+esptool.py v4.7.0
+Creating esp32 image...
+Merged 27 ELF sections
+Successfully created esp32 image.
+Generated /Users/souhir/CODES/IotHub_send_receive_copy/build/mqtt_beebotte.bin
+[79/79] cd /Users/souhir/CODES/IotHub_send_receive_copy/build/esp-idf/esptool_py && /Users/souhir/.espressif/python_env/idf5.1_py3.12_env/bin/python /Users/souhir/esp-idf-v5.1.3/components/partition_table/check_sizes.py --offset 0x8000 partition --type app /Users/souhir/CODES/IotHub_send_receive_copy/build/partition_table/partition-table.bin /Users/souhir/CODES/IotHub_send_receive_copy/build/mqtt_beebotte.bin
+mqtt_beebotte.bin binary size 0x100950 bytes. Smallest app partition is 0x200000 bytes. 0xff6b0 bytes (50%) free.

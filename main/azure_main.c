@@ -118,47 +118,56 @@ static IOTHUB_DEVICE_CLIENT_LL_HANDLE device_ll_handle;
 
 static size_t g_message_recv_count = 0;
 
-float read_adc(adc_channel_t channel)
-{
-    uint32_t adc_value = adc1_get_raw(channel);
 
-    // 0 => 0V | 4095 (12-bit ADC resolution) => 3.3V 
-    float voltage = adc_value * 3.3 / 4095;
-    printf("Voltage: %.2fV\n", voltage);
-    return voltage;
+const float MAX_CURRENT = 30.0;
+
+float read_adc(adc2_channel_t channel)
+{
+    int raw_out;
+    esp_err_t adc_result = adc2_get_raw(channel, ADC_WIDTH_BIT_12, &raw_out);
+    if (adc_result == ESP_OK)
+    {
+        float voltage = raw_out * 3.3 / 4095;
+        //printf("Voltage1 (Channel %d): %.2fV\n", channel, voltage);
+        return voltage;
+    }
+    else
+    {
+        printf("Error reading ADC channel %d\n", channel);
+        return 0.0;
+    }
+}
+
+float read_current(adc2_channel_t channel)
+{
+    int raw_out;
+    esp_err_t adc_result = adc2_get_raw(channel, ADC_WIDTH_BIT_12, &raw_out);
+    if (adc_result == ESP_OK)
+    {
+        float volt = raw_out * 3.3 / 4095;
+        float current =  volt * MAX_CURRENT;
+        
+        return current;
+    }
+    else
+    {
+        printf("Error reading ADC channel %d\n", channel);
+        return 0.0;
+    }
+}
+
+float energy_consumed(float voltage, float current, time_t time_seconds)
+{
+  printf("    Current : %.2fA\n", current);
+  printf("    voltage : %.2fV\n", voltage);
+  printf("    time_seconds %lld\n", time_seconds);
+    float energy_kwh = voltage * current * time_seconds; // Convert to kWh
+
+    printf("    Energy Consumed: %.2f kWh\n", energy_kwh);
+    return energy_kwh;
 }
 
 
-float read_current(adc_channel_t channel)
-{
-    uint32_t RawValue = adc1_get_raw(channel);
-
-    // 0-5V for 0-30A
-    double Volt = RawValue * 3.3 / 4095;
-
-    // ((AvgAcs * (3.3 / 1024.0)) is converting the read voltage in 0-3.3 volts
-    // 1.65 is offset (assumed that the system is working on 3.3V so the Vout at no current comes
-    // out to be 1.65 which is offset. If your system is working on a different voltage then
-    // you must change the offset according to the input voltage)
-    // 0.066v(66mV) is the rise in output voltage when 1A current flows at input
-    // https://www.handsontec.com/dataspecs/ACS712-Current%20Sensor.pdf
-    float current = (Volt - 1.65  )/0.066;
-
-    printf("Current: %.2f\n", current);
-    return current;
-}
-
-float energy_consumed(time_t time)
-{
-    float voltage_V = read_adc(ADC1_CHANNEL_0);
-    float current_A = read_current(ADC1_CHANNEL_6);
-
-    float energy_KWh = (voltage_V * current_A * time)/1000;
-        printf("energy_KWh: %.2fKWh\n", energy_KWh);
-
-    return energy_KWh;
-
-}
 // void vehicule_detection(void* pvParameters) {
 //     status();
 // }
@@ -218,35 +227,69 @@ static IOTHUBMESSAGE_DISPOSITION_RESULT receive_msg_callback(IOTHUB_MESSAGE_HAND
                                 } else {
                                    
                                     printf("your account balance is: %d\n", balance);
-                                    time_t start_time, now;
-                                    time(&start_time);
-
-                                    while (balance){
-                                        unsigned long volts = read_adc(ADC2_CHANNEL_1);
-                                        while ((volts >= 621) && (volts <= 1242))
+                                    
+                                        time_t start_time;
+                                        // int balance = 20;
+                                        int initialized = 0;
+                                        while (balance > 0 )
                                         {
-                                            volts = read_adc(ADC2_CHANNEL_1);
-                                            gpio_set_level(DC_RELAY_CONTACTOR, 1);
-                                            
-                                            time_t now;
-                                            time(&now);
-                                           
-                                            printf("charging\n");
+                                            float n = read_adc(ADC2_CHANNEL_0); // Channel 0 
+                                            printf("CP value : %.2fV\n", n);
+                                            if (n >= 1.242  && n <= 1.863 ) 
+                                            {   
+                                                if(!initialized){
+                                                
+                                                time(&start_time);
+                                                initialized = 1;
+                                                }
+                                                
 
-                                            time_t time_passed = now - start_time;
-                                            printf("%lld\n", time_passed);
-                                            float energy = energy_consumed(time_passed);
-                                            printf("energy: %f\n", energy);
+                                                gpio_set_level(DC_RELAY_CONTACTOR, 1);
+
+                                                time_t now;
+                                                time(&now);
+                                                printf("    start charging time %lld\n", start_time);
+                                                printf("    current time : %lld\n", now);
+                                                
+
+                                                time_t time_passed = now - start_time;
+                                                printf("    time_passed : %lld\n", time_passed);
+                                                float voltage = read_adc(ADC2_CHANNEL_2); // Replace with the correct channel for voltage
+                                                //printf("    Voltage : %.2fV\n", voltage);
+                                                float current = read_current(ADC2_CHANNEL_3); // Replace with the correct channel for current
+                                                //printf("    Current : %.2fA\n", current);  // Channel 3 
+                                                float energy = energy_consumed(voltage, current, time_passed);
+                                                
+                                                // Deduct the balance based on energy consumption and a predefined rate
+                                                float charging_rate = 0.2; // Example rate
+                                                balance -= energy * charging_rate;
+                                                if (balance <0){
+                                                balance = 0;
+                                                }
+
+                                                printf("Remaining balance: %d\n", balance);
+                                            }
+                                            else if (n >= 1.863 )
+                                            {
+                                                printf("Car unplugged\n");
+                                                gpio_set_level(DC_RELAY_CONTACTOR, 0);
+                                                initialized = 0;
+                                                printf("Charging session ended\n");
+                                            }else 
+                                            {
+                                                printf("error\n");
+                                                gpio_set_level(DC_RELAY_CONTACTOR, 0);
+                                                initialized = 0;
+                                                printf("Charging session ended\n");
+                                            }
                                             
-                                            // oprn websocket over MQTT_Protocol
-                                            // balance = balance - energy_consume * charging_rate
+                                            vTaskDelay(1000 / portTICK_PERIOD_MS); // Delay for stability
                                         }
-
-                                        printf("error");
-                                        gpio_set_level(DC_RELAY_CONTACTOR, 0);
-
+                                        initialized = 0;
+                                        printf("Charging session ended\n");
                                         // send stopped to iothub and new balance
-                                    }
+                                    
+                            
                                 }
                             }
                         }
